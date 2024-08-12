@@ -28,23 +28,38 @@ void printList(ListNode *head) {
 }
 
 int main() {
-    //链表1
-    ListNode *node4 = new ListNode(4,nullptr);
-    ListNode *node3 = new ListNode(3,node4);
-    ListNode *node2 = new ListNode(2,node3);
-    ListNode *head1 = new ListNode(1,node2);
+    // 创建相交部分链表 [8 -> 10]
+    ListNode* common1 = new ListNode(8);
+    ListNode* common2 = new ListNode(10, common1);
 
-    //链表2
-    ListNode *node31 = new ListNode(6,node4);
-    ListNode *node21 = new ListNode(5,node31);
-    ListNode *head2 = new ListNode(7,node21);
+    // 创建第一个链表 [3 -> 6 -> 9 -> 8 -> 10]
+    ListNode* headA = new ListNode(3);
+    headA->next = new ListNode(6);
+    headA->next->next = new ListNode(9, common2);
+
+    // 创建第二个链表 [4 -> 8 -> 10]
+    ListNode* headB = new ListNode(4, common2);
+
+    // 打印两个链表
+    cout << "List A: ";
+    printList(headA);
+    cout << "List B: ";
+    printList(headB);
+
+    // 创建 Solution 对象
+    Solution solution;
+
+    // 查找交点
+    ListNode* intersection = solution.getIntersectionNode(headA, headB);
+
+    // 打印结果
+    if (intersection) {
+        cout << "Intersection at node with value: " << intersection->val << endl;
+    } else {
+        cout << "No intersection found." << endl;
+    }
 
     //释放内存
 
-    while (current!=nullptr) {
-        ListNode *next = current->next;
-        delete(current);
-        current = next;
-    }
     return 0;
 }
