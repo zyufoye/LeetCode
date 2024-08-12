@@ -11,7 +11,7 @@ struct ListNode {
 
 class Solution {
 public:
-    // 递归写法， 终止条件为
+    // 递归写法， 终止条件为终端节点指向nullptr
     ListNode* reverseList1(ListNode* head,ListNode *prev = nullptr) {
         if(!head) {
             return prev;
