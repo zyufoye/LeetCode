@@ -1,7 +1,6 @@
 #include<iostream>
 using namespace std;
 
-
 struct ListNode {
     int val;
     ListNode *next;
@@ -9,19 +8,22 @@ struct ListNode {
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode *next) : val(x), next(next) {}
 };
+
 class Solution {
 public:
+    // 递归写法， 终止条件为
     ListNode* reverseList1(ListNode* head,ListNode *prev = nullptr) {
         if(!head) {
             return prev;
         }
-        ListNode *next = head->next;
+        ListNode* next = head->next;
         head->next = prev;
         return reverseList1(next,head);
     }
+    // 非递归写法，利用while循环处理每个节点
     ListNode* reverseList2(ListNode* head) {
-        ListNode *prev = nullptr, *next;
-        while(head) {
+        ListNode *next,*prev=nullptr;
+        while (head) {
             next = head->next;
             head->next = prev;
             prev = head;
@@ -30,6 +32,7 @@ public:
         return prev;
     }
 };
+
 int main(){
     // 创建链表 [1, 2, 3, 4, 5]
     ListNode* node5 = new ListNode(5);
@@ -51,7 +54,7 @@ int main(){
     }
     cout << endl;
 
-    // 释放内存（可选）
+    // 释放内存
     current = reversedHead;
     while (current != nullptr) {
         ListNode* next = current->next;
